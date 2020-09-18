@@ -19,11 +19,13 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "URL_GITHUB", '"https://api.github.com/"'
+            buildConfigField "String", "TOKEN_GITHUB", '"afb543ccfa83ae45f658c4f1d3a5c692cc87697d"'
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "URL_GITHUB", '"https://api.github.com/"'
+            buildConfigField "String", "TOKEN_GITHUB", '"afb543ccfa83ae45f658c4f1d3a5c692cc87697d"'
         }
     }
     compileOptions {
