@@ -12,5 +12,4 @@ interface ApiService {
     @GET("search/users")
     @Headers("Authorization: token ${BuildConfig.TOKEN_GITHUB}")
     fun findUserByUsername(@Query("q") username : String) : Call<ResponseUsers>
-
 }

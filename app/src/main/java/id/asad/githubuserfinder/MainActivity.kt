@@ -35,8 +35,10 @@ class MainActivity : AppCompatActivity() {
         search_user.queryHint = "Search User"
         search_user.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+            override fun onQueryTextSubmit(query: String): Boolean {
+                showNullView(false, null)
+                loadData(query)
+                return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty() || newText.isEmpty() || newText == "") {
