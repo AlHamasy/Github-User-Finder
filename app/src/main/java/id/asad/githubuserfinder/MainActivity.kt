@@ -29,26 +29,28 @@ class MainActivity : AppCompatActivity() {
             adapter = usersAdapter
         }
 
-        search_user.setIconifiedByDefault(false)
-        search_user.queryHint = "Search User"
-        search_user.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                showNullView(false, null, null)
-                loadData(query)
-                return true
-            }
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.isNullOrEmpty() || newText.isEmpty() || newText == "") {
-                    showNullView(true, "Please search for Github user in the search field", R.drawable.ic_baseline_search_96)
-                }
-                else{
+        search_user.apply {
+            queryHint = "Search user"
+            setIconifiedByDefault(false)
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
                     showNullView(false, null, null)
-                    loadData(newText)
+                    loadData(query)
+                    return true
                 }
-                return true
-            }
-        })
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty() || newText.isEmpty() || newText == "") {
+                        showNullView(true, "Please search for Github user in the search field", R.drawable.ic_baseline_search_96)
+                    }
+                    else{
+                        showNullView(false, null, null)
+                        loadData(newText)
+                    }
+                    return true
+                }
+            })
+        }
     }
 
     private fun loadData(search : String){
