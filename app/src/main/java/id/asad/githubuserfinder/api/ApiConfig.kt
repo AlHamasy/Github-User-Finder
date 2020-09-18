@@ -27,14 +27,14 @@ object ApiConfig {
             .build()
     }
 
-    private fun initGson() : Gson {
+    private fun initGSON() : Gson {
         return GsonBuilder().setLenient().create()
     }
 
     private fun getRetrofit() : Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.URL_GITHUB)
-            .addConverterFactory(GsonConverterFactory.create(initGson()))
+            .addConverterFactory(GsonConverterFactory.create(initGSON()))
             .client(getInterceptor())
             .build()
     }
