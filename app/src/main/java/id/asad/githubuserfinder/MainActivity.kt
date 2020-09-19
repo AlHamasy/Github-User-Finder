@@ -23,11 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         showNullData(true, "Please search for Github user in the search field", R.drawable.ic_baseline_search_96)
 
-        rv_user.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = usersAdapter
-        }
         search_user.apply {
             queryHint = "Search user"
             setIconifiedByDefault(false)
@@ -50,6 +45,11 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+        rv_user.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = usersAdapter
+        }
     }
 
     private fun loadData(search : String){
@@ -70,13 +70,11 @@ class MainActivity : AppCompatActivity() {
             tv_error.visibility = View.VISIBLE
             img_error.setImageResource(image ?: R.drawable.ic_launcher_foreground)
             tv_error.text = message
-
             rv_user.visibility = View.GONE
         }
         else{
             img_error.visibility = View.GONE
             tv_error.visibility = View.GONE
-
             rv_user.visibility = View.VISIBLE
         }
     }

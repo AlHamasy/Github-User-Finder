@@ -42,5 +42,4 @@ object ApiConfig {
     fun getInstance() : ApiService{
         return getRetrofit().create(ApiService::class.java)
     }
-
 }
