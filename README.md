@@ -1,7 +1,18 @@
 # Github-User-Finder
 Requirement test at tiket.com
 
-In this test, we create an application that fetches data from the Github API, and here is a screenshot of the app
+In this test, we create an application that fetches data from the Github API.
+
+Technology used:
+* Android Studio 4.0.1
+* Kotlin
+* Retrofit, GSON & OkHttp
+* Github API
+* Glide
+* ViewModel & LiveData
+* Instrumentation Testing
+
+Here is an screenshots of the app :
 
 1. No need display anything on opening the app for the first time 
 <img src="https://github.com/AlHamasy/Github-User-Finder/blob/master/screenshot/first-open.jpeg" width="270" height="540"/>
