@@ -21,30 +21,29 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         usersAdapter = UsersAdapter()
 
-        showNullView(true, "Please search for Github user in the search field", R.drawable.ic_baseline_search_96)
+        showNullData(true, "Please search for Github user in the search field", R.drawable.ic_baseline_search_96)
 
         rv_user.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = usersAdapter
         }
-
         search_user.apply {
             queryHint = "Search user"
             setIconifiedByDefault(false)
             setOnQueryTextListener(object : SearchView.OnQueryTextListener,
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    showNullView(false, null, null)
+                    showNullData(false, null, null)
                     loadData(query)
                     return true
                 }
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText.isNullOrEmpty() || newText.isEmpty() || newText == "") {
-                        showNullView(true, "Please search for Github user in the search field", R.drawable.ic_baseline_search_96)
+                        showNullData(true, "Please search for Github user in the search field", R.drawable.ic_baseline_search_96)
                     }
                     else{
-                        showNullView(false, null, null)
+                        showNullData(false, null, null)
                         loadData(newText)
                     }
                     return true
@@ -57,15 +56,15 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.findListUsers(search)
         mainViewModel.getListUsers().observe(this@MainActivity, Observer {
             usersAdapter.setDataAdapter(it)
-            if (usersAdapter.itemCount == 0) showNullView(true, "Github user not found", R.drawable.ic_baseline_not_found_96)
-            else showNullView(false, null, null)
+            if (usersAdapter.itemCount == 0) showNullData(true, "Github user not found", R.drawable.ic_baseline_not_found_96)
+            else showNullData(false, null, null)
         })
         mainViewModel.getError().observe(this@MainActivity, Observer {
-            showNullView(true, it, R.drawable.ic_baseline_error_outline_96)
+            showNullData(true, it, R.drawable.ic_baseline_error_outline_96)
         })
     }
 
-    private fun showNullView(isNull: Boolean, message: String?, image: Int?){
+    private fun showNullData(isNull: Boolean, message: String?, image: Int?){
         if (isNull){
             img_error.visibility = View.VISIBLE
             tv_error.visibility = View.VISIBLE
