@@ -23,4 +23,4 @@ Here is an screenshots of the app :
 3. No matching account
 <img src="https://github.com/AlHamasy/Github-User-Finder/blob/master/screenshot/user-not-found.jpeg" width="270" height="540"/>
 
-Thanks :)
+Thanks :) 
