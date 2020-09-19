@@ -6,7 +6,7 @@ In this test, we create an application that fetches data from the Github API.
 Technology used:
 * Android Studio 4.0.1
 * Kotlin
-* Retrofit, GSON & OkHttp
+* Retrofit, GSON & OkHttp logging interceptor
 * Github API
 * Glide
 * ViewModel & LiveData
