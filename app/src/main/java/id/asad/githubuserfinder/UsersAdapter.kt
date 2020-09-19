@@ -10,7 +10,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import id.asad.githubuserfinder.model.ItemsItem
 import kotlinx.android.synthetic.main.item_row_user.view.*
 
-class UsersAdapter() : RecyclerView.Adapter<UsersAdapter.MyViewHolder> () {
+class UsersAdapter : RecyclerView.Adapter<UsersAdapter.MyViewHolder> () {
 
     private var listUsers : ArrayList<ItemsItem?>? = ArrayList()
 
@@ -25,7 +25,7 @@ class UsersAdapter() : RecyclerView.Adapter<UsersAdapter.MyViewHolder> () {
         val imgUser: CircleImageView = view.img_user
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row_user, parent, false))
     }
 
@@ -33,7 +33,7 @@ class UsersAdapter() : RecyclerView.Adapter<UsersAdapter.MyViewHolder> () {
         return listUsers!!.size
     }
 
-    override fun onBindViewHolder(holder: UsersAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
        holder.tvUserName.text = listUsers?.get(position)?.login
        Glide.with(holder.itemView.context).load(listUsers?.get(position)?.avatarUrl).error(R.mipmap.ic_launcher_round).into(holder.imgUser)
     }
