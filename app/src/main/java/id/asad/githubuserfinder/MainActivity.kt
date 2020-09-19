@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.asad.githubuserfinder.model.ItemsItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -54,14 +55,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadData(search : String){
         mainViewModel.findListUsers(search)
-        mainViewModel.getListUsers().observe(this@MainActivity, Observer {
-            usersAdapter.setDataAdapter(it)
-            if (usersAdapter.itemCount == 0) showNullData(true, "Github user not found", R.drawable.ic_baseline_not_found_96)
-            else showNullData(false, null, null)
-        })
-        mainViewModel.getError().observe(this@MainActivity, Observer {
-            showNullData(true, it, R.drawable.ic_baseline_error_outline_96)
-        })
+        mainViewModel.getListUsers().observe(this@MainActivity, observerDataUsers())
+        mainViewModel.getError().observe(this@MainActivity, observerError())
+        showLoading(true)
+    }
+
+    private fun observerDataUsers() : Observer<ArrayList<ItemsItem?>?> = Observer {
+        usersAdapter.setDataAdapter(it)
+        if (usersAdapter.itemCount == 0) showNullData(true, "Github user not found", R.drawable.ic_baseline_not_found_96)
+        else showNullData(false, null, null)
+        showLoading(false)
+    }
+
+    private fun observerError() : Observer<String?> = Observer {
+        showNullData(true, it, R.drawable.ic_baseline_error_outline_96)
+        showLoading(false)
     }
 
     private fun showNullData(isNull: Boolean, message: String?, image: Int?){
@@ -77,5 +85,10 @@ class MainActivity : AppCompatActivity() {
             tv_error.visibility = View.GONE
             rv_user.visibility = View.VISIBLE
         }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) progressBar.visibility = View.VISIBLE
+        else progressBar.visibility = View.GONE
     }
 }
